@@ -19,6 +19,7 @@
     "@types/aws-lambda": "^8.10.108",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^18.11.3",
+    "@types/uuid": "^8.3.4",
     "aws-sdk": "^2.1238.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "serverless-aws-documentation": "^1.1.0",

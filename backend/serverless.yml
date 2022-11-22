@@ -26,9 +26,9 @@ provider:
     JWKS_URL: "https://dev-bqz9953w.us.auth0.com/.well-known/jwks.json"
     TODO_ITEMS_TABLE: TodoItems-${self:provider.stage}
     TODO_ID_INDEX: TodoIdIndex
-    ATTACHMENTS_S3_BUCKET: serverless-todo-app-tony-${self:provider.stage}
-    ATTACHMENT_UPLOAD_URL_EXPIRATION: 300
-    ATTACHMENT_DOWNLOAD_URL_EXPIRATION: 604800
+    S3_BUCKET: serverless-todo-app-tony-${self:provider.stage}
+    UPLOAD_URL_EXPIRATION: 300
+    DOWNLOAD_URL_EXPIRATION: 604800
 
 functions:
   Auth:
@@ -51,7 +51,7 @@ functions:
         Action:
           - s3:HeadObject
           - s3:GetObject
-        Resource: arn:aws:s3:::${self:provider.environment.ATTACHMENTS_S3_BUCKET}/*
+        Resource: arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*
 
   CreateTodo:
     handler: src/lambda/http/createTodo.handler
@@ -125,7 +125,7 @@ functions:
       - Effect: Allow
         Action:
           - s3:PutObject
-        Resource: arn:aws:s3:::${self:provider.environment.ATTACHMENTS_S3_BUCKET}/*
+        Resource: arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*
 
 resources:
   Resources:
@@ -173,7 +173,7 @@ resources:
     AttachmentsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:provider.environment.ATTACHMENTS_S3_BUCKET}
+        BucketName: ${self:provider.environment.S3_BUCKET}
         CorsConfiguration:
           CorsRules:
             - AllowedOrigins:
